@@ -11,15 +11,15 @@ Annals of Science
 
 
 ## :bookmark_tabs: Table of Contents
-*[Introduction](#speech_balloon-introduction)
-*[Main Objective](#dart-main-objetive)
-*[Architecture](#building_construction-system-architecture)
-*[Setup](#⚙-setup)
-*[Files Structure](#🗄️projects-structure)
-*[Launching the Application](#🚀launching-the-application)
-*[Running Tests](#🛠️running-tests)
-*[Software Used](#toolbox-software-used)
-*[Sources](#black_nib-sources)
+* [Introduction](#speech_balloon-introduction)
+* [Main Objective](#dart-main-objetive)
+* [Architecture](#building_construction-system-architecture)
+* [Setup](#⚙-setup)
+* [Files Structure](#🗄️projects-structure)
+* [Launching the Application](#🚀launching-the-application)
+* [Running Tests](#🛠️running-tests)
+* [Software Used](#toolbox-software-used)
+* [Sources](#black_nib-sources)
 
 
 ## :speech_balloon: Introduction
