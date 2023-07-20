@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Edit Persona</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Pagina de edición de una persona">
+  <meta name="author" content="Sofia Brotton Ruiz">
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://unpkg.com/jquery@1"></script>
+  <script type="text/javascript" src="EditPersona.js"></script>
+  <link rel="icon" href="../Fotos/icon.png" type="image/icon type">
+</head>
+
+<body onload="Carga()" style="background-color:#b0c9e0">
+  <div class="contenedor">
+    <header class="cabecera-principal" style="margin-bottom: 20px;">
+      <h1><b>Editar persona</b></h1>
+      <div class="div-volver">
+        <button id="boton-volver" onclick="Volver()">
+          <img src="../Fotos/arrow.png" alt="Volver" />
+        </button>
+      </div>
+    </header>
+    <div id="div_info_usuario">
+    </div>
+    <div id="div_formulario_editar">
+      <form id="form_edit">
+        <h3>Modifique los campos que desee:</h3>
+        <label for="NombrePersona">Nombre de la persona: </label>
+        <input id="NombrePersona" type="text" name="NombrePersona" placeholder="Nombre de la persona" />
+        <br><br>
+        <label for="BirthDate">Fecha de Nacimiento: </label>
+        <input id="BirthDate" type="text" name="BirthDate" placeholder="Format: yyyy-mm-dd" />
+        <br><br>
+        <label for="DeathDate">Fecha de Muerte: </label>
+        <input id="DeathDate" type="text" name="DeathDate" placeholder="Format: yyyy-mm-dd" />
+        <br><br>
+        <label for="ImageUrl">ImageUrl: </label>
+        <input id="ImageUrl" type="text" name="ImageUrl" placeholder="ImageUrl" />
+        <br><br>
+        <label for="WikiUrl">WikiUrl: </label>
+        <input id="WikiUrl" type="text" name="WikiUrl" placeholder="WikiUrl" />
+        <br><br>
+        <input type="button" style="display: block; margin: 0 auto;" class="button" name="Edit Person"
+          value="Edit Person" onclick="EditPerson()" />
+      </form>
+    </div>
+    <div class="relaciones">
+      <div id="relaciones_productos">
+        <h4>Relaciones con productos</h4>
+        <label for="NuevaRelacionProducto">Añadir nueva relación con: </label>
+        <select name="NuevaRelacionProducto" id="NuevaRelacionProducto">
+        </select>
+        <input type="button" name="CrearRelacionProducto" value="Crear Relacion Producto" onclick="CrearRelacionProducto()" />
+        <h4>*Si se añade una relación ya existente, no habrá ninguna modificación.</h4>
+      </div>
+      <div id="relaciones_entidades">
+        <h4>Relaciones con entidades</h4>
+        <label for="NuevaRelacionEntidad">Añadir nueva relación con: </label>
+        <select name="NuevaRelacionEntidad" id="NuevaRelacionEntidad">
+        </select>
+        <input type="button" name="CrearRelacionEntidad" value="Crear Relacion Entidad" onclick="CrearRelacionEntidad()" />
+        <h4>*Si se añade una relación ya existente, no habrá ninguna modificación.</h4>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

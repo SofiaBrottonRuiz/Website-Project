@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Elementos</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Sofia Brotton"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta http-equiv="expires" content="0" />
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <link rel="icon" href="./icon.png" type="image/icon type">
+        <script src="../script.js"></script>
+    </head>
+    <body onload="InitializeElement();" style="background-color: #b0c9e0" >
+        <header>
+            <a href="index.html" class="back-button">
+                <img src="./arrow.png" alt="Back">
+            </a>
+            <h1><b>Anales de la Ciencia</b></h1>
+            <form  style="margin-top: 30px;">         
+                <div class="LoggedOut" id="LogIn">
+                    <label><b>&nbsp;Usuario:&nbsp;</b></label>
+                    <input id="username" type="text" placeholder="Introduce Usuario"/>
+                    <label><b>&nbsp;Contraseña:&nbsp;</b></label>
+                    <input id="password" type="password" placeholder="Introduce Contraseña">
+                    <button id="Entrar" class="button" type="button" onclick="UserLogin();">Login</button>
+                </div>  
+                <back id="LogOut" class="LoggedIn">
+                    <button id="Salir" class="button" type="button" onclick="UserLogin();">Logout</button>
+                </back>  
+            </form>  
+        </header>  
+        <div id="Details">
+            <div id="Details1">
+                <div id="Details1Left">
+                    <h3 id="Name">Producto</h3>
+                    <img id="UrlImage" src="" alt="Imagen no disponible">
+                    <p id="DateI">Fecha Inicio: </p>
+                    <p id="DateF">Fecha Fin: </p>
+                </div>
+                <iframe width="2000" height="500" id="UrlWiki" src="">URLWikipedia</iframe>
+            </div>
+            <table id="Participantes">
+                <tr>
+                    <th class="ParticipanPersonas">Personas participantes</th>
+                    <th class="ParticipanEntidades">Entidades participantes</th>
+                </tr>
+                <tr>
+                    <td>
+                        <ul id="ListPeople" class="ParticipanPersonas"></ul>
+                    </td>
+                    <td>
+                        <ul id="ListEntities" class="ParticipanEntidades"></ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="Form" class="LoggedIn">
+            <form onsubmit="SaveNewObject();">
+                <label id="LabelName" for="NameForm">Nombre del producto: </label>
+                <input id="NameForm" type="text" autocomplete="" />
+                <br />
+                <label id="LabelDateI" for="DateIForm">Fecha Inicio: </label>
+                <input id="DateIForm" type="text" autocomplete="" />
+                <br />
+                <label id="LabelDateF" for="DateFForm">Fecha Fin: </label>
+                <input id="DateFForm" type="text" autocomplete="" />
+                <br />
+                <label for="UrlImageForm">URLImagen: </label>
+                <input id="UrlImageForm" type="url" autocomplete="" />
+                <br />
+                <label for="UrlWikiForm">URLWikipedia: </label>
+                <input id="UrlWikiForm" type="url" autocomplete="" />
+                <br />
+                <div id="ParticipantesForm">
+                    <div id="ParticipantesPersonasForm">
+                        <label for="ParticipanPersonas">Personas Participantes</label>
+                        <select id="ParticipanPersonas" multiple></select>
+                    </div>
+                    <div id="ParticipantesEntidadesForm">
+                        <label for="ParticipanEntidades">Entidades Participantes</label>
+                        <select id="ParticipanEntidades" multiple></select>
+                    </div>
+                </div>
+                <br />
+                <button id="Save" type="submit">Guardar</button>
+            </form>
+        </div>
+    </body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Editar Perfil</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Sofia Brotton Ruiz">
+        <link rel="stylesheet"   type="text/css" href="../style.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="icon" href="../Fotos/icon.png" type="image/icon type">
+    </head>
+    <body onload="Carga()" style="background-color:#b0c9e0;">
+        <div class="contenedor">
+            <header class="cabecera-principal"  style="margin-bottom: 20px;">
+                <h1><b>Editar Perfil</b></h1>
+                <div class="div-volver">
+                    <button id="boton-volver" onclick="Volver()">
+                        <img src="../Fotos/arrow.png" alt="Volver" />
+                    </button>
+                </div>
+            </header>
+        </div>
+        <div id="div_info_usuario">
+        </div>
+        <div id="div_formulario_editar">
+            <form id="form_edit">
+                <h3>Modifique los campos que desee:</h3>
+                <h4>No deje en blanco el campo constraseña!! (razones de seguridad)</h4>
+                <label for="Username">Nombre del usuario: </label>
+                <input id="Username" type="text" name="Username" placeholder="Nombre del usuario"/>
+                <br><br>
+                <label for="Email">Email: </label>
+                <input id="Email" type="text" name="Email" placeholder="Format: example@example.com"/>
+                <br><br>
+                <label for="Contraseña">Contraseña: </label>
+                <input id="Contraseña" type="password" name="Contraseña" placeholder="New/Old Password"/>
+                <br><br>
+                <label for="BirthDate">Fecha de Nacimiento: </label>
+                <input id="BirthDate" type="text" name="ImageUrl" placeholder="yyyy-mm-dd"/>
+                <br><br>
+                <input style="display: block; margin: 0 auto;" type="button" class="button" name="Edit User" value="Edit User" onclick="EditUsuario()" />
+            </form>
+        </div>
+        <script>
+            let userId = null;
+            function Carga() {
+                // Recuperamos los datos del querystring del URL
+                const urlParams = new URLSearchParams(window.location.search);
+                userId = urlParams.get('userId');
+
+                CargaInfoUsuario();
+                RellenarForm();
+            }
+
+            function EditUsuario() {
+                let usuario = null;
+
+                function rellenarUsuario() {
+                    usuario = {
+                    username: $("#Username").val(),
+                    contraseña: $("#Contraseña").val(),
+                    email: $("#Email").val(),
+                    birthDate: $("#BirthDate").val()
+                    };
+                }
+
+                rellenarUsuario();
+
+                if (usuario === null) {
+                    alert("Ha ocurrido un problema, intentalo de nuevo.");
+                } else {
+                    // Retrieve current Etag value
+                    $.ajax({
+                    type: "HEAD",
+                    url: '/api/v1/users/' + userId,
+                    headers: {
+                        "Authorization": localStorage.getItem('authHeader')
+                    },
+                    success: function (data, textStatus, xhr) {
+                        const etag = xhr.getResponseHeader("ETag");
+
+                        // Perform the update request with Etag header
+                        $.ajax({
+                        type: "PUT",
+                        url: '/api/v1/users/' + userId,
+                        headers: {
+                            "Authorization": localStorage.getItem('authHeader'),
+                            "If-Match": etag
+                        },
+                        data: JSON.stringify(usuario),
+                        contentType: "application/json",
+                        success: function (data) {
+                            console.log(data);
+                            alert("Cambios guardados");
+                            location.replace("http://127.0.0.1:8000/FrontEnd/Writer/PerfilWriter.html?userId=" + userId);
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log(xhr.status + ": " + xhr.responseText);
+                        }
+                        });
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                    });
+                }
+            }
+
+            function CargaInfoUsuario() {
+                $.ajax({
+                    type: "GET",
+                    url: '/api/v1/users/' + userId,
+                    headers: { "Authorization": localStorage.getItem('authHeader') },
+                    success: function (data) {
+                        userRole = data.user.role;
+
+                        let p = document.createElement("p");
+                        let text = document.createTextNode("User: " + data.user.username + " - Role: " + data.user.role);
+                        p.appendChild(text);
+                        document.getElementById("div_info_usuario").appendChild(p);
+                    }
+                });
+            }
+
+            function RellenarForm() {
+                $.ajax({
+                    type: "GET",
+                    url: '/api/v1/users/' + userId,
+                    headers: { "Authorization": localStorage.getItem('authHeader') },
+                    success: function (data) {
+                        $("#Username").val(data.user.username);
+                        $("#Contraseña").val(""); // Leave password field empty for security reasons
+                        $("#Email").val(data.user.email);
+                        $("#BirthDate").val(data.user.birthDate);
+                    }
+                });
+            }
+
+            function Volver() {
+                location.replace("http://127.0.0.1:8000/FrontEnd/Writer/PerfilWriter.html?userId=" + userId);
+            }
+        </script>
+    </body>
+</html>

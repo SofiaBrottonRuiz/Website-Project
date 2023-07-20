@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Perfil</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Sofia Brotton"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="../style.css"/>
+        <link rel="icon" href="./../Fotos/icon.png" type="image/icon type">
+        <script src="https://unpkg.com/jquery@1"></script>
+        <link rel="icon" href="../Fotos/icon.png" type="image/icon type">
+    </head>
+    <body style="background-color:#b0c9e0" onload="CargaDatosWriter()"> 
+        <div class="contenedor">
+            <header style="margin-bottom: 20px;">
+                <h1><b>Perfil del Usuario </b></h1>
+                <div class="div-volver">
+                    <button id="boton-volver" onclick="Volver()">
+                        <img src="../Fotos/arrow.png" alt="Volver" />
+                      </button>
+                </div>
+            </header> 
+            <div class="datos-writer" id="datos-writer" style="margin-top: 40px;">
+            </div>
+            <input id="boton-editarperfil" type="button" class="button3" style="margin-top:80px;"name="Editar Perfil" value="Editar Perfil" onclick="EditarPerfil()" />
+        </div>
+        <script>
+            let userId = null;
+            let usuario = null;
+            let access_token = null;
+
+            function CargaDatosWriter(){
+                const urlParams = new URLSearchParams(window.location.search);
+                userId = urlParams.get('userId');
+                console.log("1");
+
+                let authHeader = localStorage.getItem('authHeader');
+                if (authHeader) {
+                    access_token = authHeader.split(' ')[1];
+
+                    $.ajax({
+                        type: "GET",
+                        url: '/api/v1/users/' + userId,
+                        headers: {"Authorization": 'Bearer ' + access_token},
+                        success: function (data) {
+                            usuario = data.user;
+                            console.log("FUNCIONA");
+                            MostrarDatosUsuario(usuario);
+                        },
+                        error: function (xhr, status, error) {
+                            if (xhr.status === 401) {
+                                // Handle unauthorized error
+                                // Redirect to login page or display an error message
+                                console.log("Unauthorized Error");
+                            } else {
+                                console.log("Error: " + error);
+                            }
+                        }
+                    });
+                } else {
+                    console.log("Auth header not found in localStorage");
+                }
+            }
+
+            function MostrarDatosUsuario(usuario) {
+                console.log(usuario);
+        
+                let h3 = document.createElement("h3");
+                let text_h3 = document.createTextNode("Datos del usuario " +usuario.username+ ":");
+        
+                h3.appendChild(text_h3);
+                document.getElementById("datos-writer").appendChild(h3);
+        
+                let idUsuario = document.createElement("h5");
+                let textoId = document.createTextNode("Id: " +usuario.id);
+        
+                idUsuario.appendChild(textoId);
+                document.getElementById("datos-writer").appendChild(idUsuario);
+        
+                let nombreUsuario = document.createElement("h5");
+                let textoNombre = document.createTextNode("Nombre: " +usuario.username);
+        
+                nombreUsuario.appendChild(textoNombre);
+                document.getElementById("datos-writer").appendChild(nombreUsuario);
+        
+                let emailUsuario = document.createElement("h5");
+                let textoEmail = document.createTextNode("Email: " +usuario.email);
+        
+                emailUsuario.appendChild(textoEmail);
+                document.getElementById("datos-writer").appendChild(emailUsuario);
+        
+                let rolUsuario = document.createElement("h5");
+                let textoRol = document.createTextNode("Role: " +usuario.role);
+        
+                rolUsuario.appendChild(textoRol);
+                document.getElementById("datos-writer").appendChild(rolUsuario);
+                
+                let birthDateUsuario = document.createElement("h5");
+                let textoBirthDate = document.createTextNode("BirthDate: " +usuario.birthDate);
+        
+                birthDateUsuario.appendChild(textoBirthDate);
+                document.getElementById("datos-writer").appendChild(birthDateUsuario);
+        
+                let isActiveUsuario = document.createElement("h5");
+                let textoIsActive = document.createTextNode("Status: " +usuario.isActive);
+        
+                isActiveUsuario.appendChild(textoIsActive);
+                document.getElementById("datos-writer").appendChild(isActiveUsuario);
+            }
+        
+            function Volver(){
+                location.replace("http://127.0.0.1:8000/FrontEnd/Reader/IndexReader.html?userId="+ userId);
+            }
+        
+            function EditarPerfil(){
+                location.replace("http://127.0.0.1:8000/FrontEnd/Reader/editarPerfilReader.html?userId="+ userId);
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Editar Usuarios</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Página de edición de un usuario">
+    <meta name="author" content="Sofia Brotton Ruiz">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://unpkg.com/jquery@1"></script>
+    <link rel="icon" href="../Fotos/icon.png" type="image/icon type">
+</head>
+    <body style="background-color:#b0c9e0" onload="Carga()">
+        <div class="contenedor">
+            <header class="cabecera-principal" style="margin-bottom: 20px;">
+                <h1>Gestión de Usuarios</h1>
+                <div class="div-volver">
+                    <button id="boton-volver" onclick="Volver()">
+                        <img src="../Fotos/arrow.png" alt="Volver" />
+                    </button>
+                </div>
+            </header>   
+        </div>
+        <div id="div_info_usuario" style="margin-left: 40px; margin-right: 40px;">
+        </div>
+        <div id="div_formulario_editar">
+            <form id="form_edit">
+                <h3>Modifique los campos que desee:</h3>
+                <br></br>
+                <label for="Username">Nombre del usuario: </label>
+                <input id="Username" type="text" name="Username" placeholder="Nombre del usuario"/>
+                <br><br>
+                <label for="Email">Email: </label>
+                <input id="Email" type="text" name="Email" placeholder="Format: example@example.com"/>
+                <br><br>
+                <label for="Role">Rol (READER/WRITER): </label>
+                <input id="Role" type="text" name="Role" placeholder="reader/writer"/>
+                 <br><br>
+                <label for="BirthDate">Fecha de Nacimiento: </label>
+                <input id="BirthDate" type="text" name="BirthDate" placeholder="yyyy-mm-aa"/>
+                <br><br>
+                <label for="IsActive">ACTIVE/INACTIVE: </label>
+                <input id="IsActive" type="text" name="IsActive" placeholder="active/inactive"/>
+                <br><br>
+                <input style="display: block; margin: 0 auto;" class="button"  type="button" name="Edit User" value="Edit User" onclick="EditUsuario()" />
+                </form>
+            </div>
+        </div>
+        <script>
+            let userId = null
+            let idUsuarioEditar = null
+            let etag = null
+
+            function Carga(){
+                //Recuperamos los datos del querystring del URL
+                const urlParams = new URLSearchParams(window.location.search);
+                userId = urlParams.get('userId');
+                idUsuarioEditar = urlParams.get('idUsuarioEditar');
+
+                CargaInfoUsuario();
+                getEtag();
+                RellenarForm();
+            }
+
+            function EditUsuario() {
+                let usuario = {};
+
+                rellenarUsuario();
+
+                function rellenarUsuario() {
+                    usuario = {
+                        username: $("#Username").val(),
+                        email: $("#Email").val(),
+                        role: $("#Role").val(),
+                        birthDate: $("#BirthDate").val(),
+                        isActive: $("#IsActive").val()
+                    };
+                }
+
+                //Para poder hacer un PUT necesitamos el Etag y este le conseguimos de la cabecera de respuesta de un GET a ese recurso en concreto
+
+                if (etag === null) {
+                    alert("No se ha podido obtener el Etag del producto, esto pasa a veces, intentalo de nuevo");
+                } else {
+                    console.log(usuario);
+                    $.ajax({
+                        type: "PUT",
+                        url: '/api/v1/users/' + idUsuarioEditar,
+                        headers: {"Authorization": localStorage.getItem('authHeader') , "if-Match": etag},
+                        data: usuario,
+                        // dataType: 'json',
+                        success: function () {
+                            location.replace("http://127.0.0.1:8000/FrontEnd/Writer/GestionUsuarios.html?userId="+ userId);
+                        }
+                    });
+                    alert("Usuario editado")
+                }
+            }
+
+            function Volver(){
+                location.replace("http://127.0.0.1:8000/FrontEnd/Writer/GestionUsuarios.html?userId="+ userId);
+            }
+
+            function getEtag(){
+                $.ajax({
+                    type: "GET",
+                    url: '/api/v1/users/'+idUsuarioEditar,
+                    headers: {"Authorization": localStorage.getItem('authHeader')},
+                    // dataType: 'json',
+                    success: function (data, request, XMLHttpRequest) {
+                        let etagString = null;
+                        let headers = XMLHttpRequest.getAllResponseHeaders();
+                        let arr = headers.trim().split(/[\r\n]+/);
+                        let i = 0
+                        while(i < arr.length){
+                            if(arr[i].substring(0,4) === "etag"){
+                                etagString = arr[i];
+                            }
+                            i += 1;
+                        }
+                        etag = etagString.substring(6);
+                    }
+                });
+            }
+
+            function RellenarForm(){
+                $.ajax({
+                    type: "GET",
+                    url: '/api/v1/users/'+idUsuarioEditar,
+                    headers: {"Authorization": localStorage.getItem('authHeader')},
+                    // dataType: 'json',
+                    success: function (data, request, XMLHttpRequest) {
+                        $("#Username").val(data.user.username);
+                        $("#Email").val(data.user.email);
+                        $("#Role").val(data.user.role);
+                        $("#BirthDate").val(data.user.birthDate);
+                        $("#IsActive").val(data.user.isActive);
+                    }
+                });
+            }
+
+            function CargaInfoUsuario(){
+                $.ajax({
+                    type: "GET",
+                    url: '/api/v1/users/' + userId,
+                    headers: {"Authorization": localStorage.getItem('authHeader')},
+                    // dataType: 'json',
+                    success: function (data) {
+                        userName = data.user.name;
+
+                        let p = document.createElement("p");
+                        let text = document.createTextNode("User: " +data.user.username+ " - Role: " +data.user.role);
+                        p.appendChild(text);
+                        document.getElementById("div_info_usuario").appendChild(p);
+                    }
+                });
+            }
+
+        </script>
+    </body>
+</html>
