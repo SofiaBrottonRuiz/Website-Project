@@ -10,15 +10,15 @@
 
 
 ## :bookmark_tabs: Índice
-*[Introducción](#speech_balloon-introducción)
-*[Objetivo de la práctica](#dart-objetivo-de-la-práctica)
-*[Arquitectura](#building_construction-arquitectura-del-sistema)
-*[Instalación del proyecto](#⚙instalación-del-proyecto️)
-*[Estructura del proyecto](#🗄️estructura-del-proyecto)
-*[Puesta en marcha de la aplicación](#🚀puesta-en-marcha-de-la-aplicación)
-*[Ejecución de pruebas](#🛠️ejecución-de-pruebas)
-*[Software utilizado](#toolboxsoftware-utilizado)
-*[Fuentes](#black_nib-fuentes)
+* [Introducción](#speech_balloon-introducción)
+* [Objetivo de la práctica](#dart-objetivo-de-la-práctica)
+* [Arquitectura](#building_construction-arquitectura-del-sistema)
+* [Instalación del proyecto](#⚙instalación-del-proyecto️)
+* [Estructura del proyecto](#🗄️estructura-del-proyecto)
+* [Puesta en marcha de la aplicación](#🚀puesta-en-marcha-de-la-aplicación)
+* [Ejecución de pruebas](#🛠️ejecución-de-pruebas)
+* [Software utilizado](#toolboxsoftware-utilizado)
+* [Fuentes](#black_nib-fuentes)
 
 
 ## :speech_balloon: Introducción
