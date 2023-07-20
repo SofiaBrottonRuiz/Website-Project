@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Crear Persona</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Sofia Brotton"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="../style.css"/>
+        <link rel="icon" href="../Fotos/icon.png" type="image/icon type">
+        <script src="https://unpkg.com/jquery@1"></script>
+    </head>
+    <body onload="Carga()" style="background-color:#b0c9e0;">
+        <header>
+            <h1><b>Creación de Persona</b></h1>
+        </header>
+        <style>
+            label {
+                display: block;
+                font-size: 18px;
+                font-weight: bold;
+            }
+            
+            input[type="text"],
+            input[type="password"],
+            input[type="email"] {
+                width: 300px;
+                padding: 10px;
+                font-size: 15px;
+                margin-bottom: 10px;
+            }
+        </style>
+        <div class="div-volver">
+            <button id="boton-volver" onclick="Volver()">
+                <img src="../Fotos/arrow.png" alt="Volver" />
+            </button>
+        </div>
+        <main style="margin-top: 30px; padding-left: 300px; padding-right: 300px;">
+            <div id="div_formulario_crear" style=" margin-top: 50px; margin-left:150px; margin-right:150px; margin-bottom: 50px;">
+                <form id="form_create">
+                    <label for="NombrePersona">Nombre de la persona: </label>
+                    <input id="NombrePersona" type="text" name="NombrePersona" placeholder="Nombre de la persona"/>
+                    <br><br>
+                    <label for="BirthDate">Fecha de nacimiento: </label>
+                    <input id="BirthDate" type="text" name="BirthDate" placeholder="Format: yyyy-mm-dd"/>
+                    <br><br>
+                    <label for="DeathDate">Fecha de muerte: </label>
+                    <input id="DeathDate" type="text" name="DeathDate" placeholder="Format: yyyy-mm-dd"/>
+                    <br><br>
+                    <label for="ImageUrl">ImageUrl: </label>
+                    <input id="ImageUrl" type="text" name="ImageUrl" placeholder="ImageUrl"/>
+                    <br><br>
+                    <label for="WikiUrl">WikiUrl: </label>
+                    <input id="WikiUrl" type="text" name="WikiUrl" placeholder="WikiUrl"/>
+                    <br><br>
+                    <input type="button" class="button4" name="Create Person" value="Create Person" onclick="CreatePerson()" />
+                </form>
+            </div>
+        </div>
+        <script>
+            let userId = null
+
+            function Carga(){
+                //Recuperamos los datos del querystring del URL
+                const urlParams = new URLSearchParams(window.location.search);
+                userId = urlParams.get('userId');
+
+                CargaInfoUsuario();
+
+            }
+
+            function CreatePerson(){
+                let persona = null;
+
+                rellenarPersona();
+
+                function rellenarPersona(){
+                    persona = {
+                        name: $("#NombrePersona").val(),
+                        birthDate: $("#BirthDate").val(),
+                        deathDate: $("#DeathDate").val(),
+                        imageUrl: $("#ImageUrl").val(),
+                        wikiUrl: $("#WikiUrl").val()
+                    };
+                }
+
+                if(persona === null){
+                    alert("Ha ocurrido un problema, intentalo de nuevo.")
+                }else{
+                    $.ajax({
+                        type: "POST",
+                        url: '/api/v1/persons',
+                        headers: {"Authorization": localStorage.getItem('authHeader')},
+                        data: persona,
+                        // dataType: 'json',
+                        success: function (data) {
+                            console.log(data)
+                            location.replace("http://127.0.0.1:8000/FrontEnd/Writer/IndexWriter.html?userId=" +userId);
+                        }
+                    });
+                }
+            }
+
+            function CargaInfoUsuario(){
+                $.ajax({
+                    type: "GET",
+                    url: '/api/v1/users/' + userId,
+                    headers: {"Authorization": localStorage.getItem('authHeader')},
+                    // dataType: 'json',
+                    success: function (data) {
+                        userRole = data.user.role;
+
+                        let p = document.createElement("p");
+                        let text = document.createTextNode("User: " +data.user.username+ " - Role: " +data.user.role);
+                        p.appendChild(text);
+                        document.getElementById("div_info_usuario").appendChild(p);
+                    }
+                });
+            }
+
+            function Volver(){
+                location.replace("http://127.0.0.1:8000/FrontEnd/Writer/IndexWriter.html?userId=" +userId);
+            }
+        </script>
+    </body>
+</html>

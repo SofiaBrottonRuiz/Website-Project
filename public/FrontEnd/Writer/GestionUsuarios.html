@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Gestion de Usuarios</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Pagina de gestion de usuarios del subsistema writer del frontend">
+    <meta name="author" content="Sofia Brotton Ruiz">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://unpkg.com/jquery@1"></script>
+    <link rel="icon" href="../Fotos/icon.png" type="image/icon type">
+</head>
+    <body onload="Carga()" style="background-color:#b0c9e0">
+    <div class="contenedor">
+        <header class="cabecera-principal" style="margin-bottom: 20px;">
+            <h1>Gestión de Usuarios</h1>
+            <div class="div-volver">
+                <button id="boton-volver" onclick="Volver()">
+                    <img src="../Fotos/arrow.png" alt="Volver" />
+                </button>
+            </div>
+        </header>
+    </div>
+    <div id="div_info_usuario"  style="margin-left: 40px; margin-right: 40px;">
+    </div>
+    <div class="contenido-usuarios" id="div-usuarios">
+    </div>
+    </div>
+    
+    <script>
+        let userId = null
+        let userName = null
+
+        function Carga(){
+            //Recuperamos los datos del querystring del URL
+            const urlParams = new URLSearchParams(window.location.search);
+            userId = urlParams.get('userId');
+
+            CargaInfoUsuario();
+            MostrarUsuarios();
+        }
+
+        function MostrarUsuarios(){
+            $.ajax({
+                type: "GET",
+                url: '/api/v1/users',
+                headers: {"Authorization": localStorage.getItem('authHeader')},
+                // dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    let i = 0
+                    while (i < data.users.length) {
+                        if (data.users[i].user.id != userId) {
+                            let p = document.createElement("p");
+                            let text = document.createTextNode("Id: " + data.users[i].user.id + " - ");
+                            p.appendChild(text);
+
+                            let statusText = document.createTextNode(data.users[i].user.isActive === "ACTIVE" ? "ACTIVE" : "INACTIVE");
+                            p.appendChild(statusText);
+
+                            let usernameText = document.createTextNode(" - Username: " + data.users[i].user.username + " ");
+                            p.appendChild(usernameText);
+
+                            let deleteButton = document.createElement("button");
+                            deleteButton.name = "Delete";
+                            deleteButton.textContent = "Delete";
+                            deleteButton.setAttribute("onclick", "DeleteUser("+data.users[i].user.id+")")
+                            deleteButton.style.margin = "0 3px";
+
+                            let editButton = document.createElement("button");
+                            editButton.name = "Edit";
+                            editButton.textContent = "Edit";
+                            editButton.setAttribute("onclick", "EditUser("+data.users[i].user.id+")")
+                            editButton.style.margin = "0 3px";
+
+                        
+                            p.appendChild(editButton);
+                            p.appendChild(deleteButton);
+
+                            document.getElementById("div-usuarios").appendChild(p);
+                        }
+                        i += 1;
+                    }
+                }
+            });
+        }
+
+        function DeleteUser(id){
+            $.ajax({
+                type: "DELETE",
+                url: '/api/v1/users/'+id,
+                headers: {"Authorization": localStorage.getItem('authHeader')},
+                // dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    location.replace("http://127.0.0.1:8000/FrontEnd/Writer/GestionUsuarios.html?userId="+ userId);
+                }
+            })
+        }
+
+        function EditUser(id){
+            location.replace("http://127.0.0.1:8000/FrontEnd/Writer/GestionUserEditar.html?userId="+ userId + "&idUsuarioEditar=" +id);
+        }
+
+        function Volver(){
+            location.replace("http://127.0.0.1:8000/FrontEnd/Writer/IndexWriter.html?userId="+ userId);
+        }
+
+
+        function CargaInfoUsuario(){
+            $.ajax({
+                type: "GET",
+                url: '/api/v1/users/' + userId,
+                headers: {"Authorization": localStorage.getItem('authHeader')},
+                // dataType: 'json',
+                success: function (data) {
+                    let p = document.createElement("p");
+                    let text = document.createTextNode("User: " +data.user.username+ " - Role: " +data.user.role);
+                    p.appendChild(text);
+                    document.getElementById("div_info_usuario").appendChild(p);
+                }
+            });
+        }
+    </script>
+    </body>
+</html>

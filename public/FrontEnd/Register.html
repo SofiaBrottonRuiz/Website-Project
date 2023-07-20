@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Registro</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Sofia Brotton"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <link rel="icon" href="./Fotos/icon.png" type="image/icon type">
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="./script.js"></script>
+    </head>
+    <body onload=initialize() style="background-color:#b0c9e0" >
+        <header>
+            <h1><b>Registro</b></h1>
+        </header>
+        <style>
+            label {
+                display: block;
+                font-size: 15px;
+                font-weight: bold;
+            }
+            
+            input[type="text"],
+            input[type="password"],
+            input[type="email"] {
+                width: 300px;
+                padding: 10px;
+                font-size: 10px;
+                margin-bottom: 10px;
+            }
+        </style>
+        <div class="div-volver">
+            <button id="boton-volver" onclick="VolverPortada()">
+                <img src="./Fotos/arrow.png" alt="Volver" />
+            </button>
+        </div>
+        <main style="margin-top: 30px; padding-left: 300px; padding-right: 300px;">
+            <div id="div_formulario_signup">
+                <form id="form_signup">
+                    <label for="NombreUsuario">*Nombre de Usuario: </label>
+                    <input id="NombreUsuario" type="text" name="NombreUsuario" placeholder="Username" required/>
+                    <br><br>
+                    <label for="Contraseña">*Contraseña: </label>
+                    <input id="Contraseña" type="password" name="Contraseña" placeholder="Password" required/>
+                    <br><br>
+                    <label for="Email">*Email: </label>
+                    <input id="Email" type="email" name="Email" placeholder="Email" required/>
+                    <br><br>
+                    <label for="BirthDate">Fecha de nacimiento: </label>
+                    <input id="BirthDate" type="text" name="BirthDate" placeholder="yyyy-mm-dd"/>
+                    <br><br>
+                    <input type="submit" class="button" name="Sign Up" value="Sign Up" />
+                </form>
+            </div>
+        </main>   
+    </body>
+</html>

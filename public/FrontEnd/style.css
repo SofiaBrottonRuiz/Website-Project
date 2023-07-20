@@ -1,0 +1,581 @@
+* {
+    margin:0; 
+    padding:0
+}
+
+
+/* Portada */
+header {
+    text-align: center;
+    font-size: large;
+    color:#141850;
+    background-color: #deebf7;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+body {
+    text-align:center;
+}
+
+.LoggedOut {
+    color:#141850;
+    max-width: 1000px;
+    width: 100%;  
+    margin: 0 auto; 
+    display: flex; 
+    justify-content: center; 
+}
+
+.LoggedOut label {
+    padding-top: 20px; 
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 14px 20px;
+    margin: 10px 10px;
+    border: 1px solid #ed7966; 
+    border-radius: 4px;
+    border-width: 2px;
+    box-sizing: border-box; 
+    vertical-align: middle;
+}
+
+.button {
+    background-color: #ed7966;
+    color: #141850;
+    border-radius: 4px;
+    padding: 14px 20px;
+    margin: 10px 20px;
+    border: none;
+    cursor: pointer;
+    width: 30%; 
+}
+
+.button2 {
+    background-color: transparent;
+    border: 2px solid #ed7966;
+    color: #141850;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 14px 20px;
+    margin: 10px 20px;
+    padding-left: 20px;
+    width: 30%;
+}
+
+.button:hover, .button2:hover, .class-button, .button3:hover, .button4:hover {
+    opacity: 0.8;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+
+/* Back buttons */
+.div-volver {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+}
+  
+#boton-volver {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+  
+#boton-volver img {
+    width: 40px;
+    height: 40px;
+}
+
+.back-button img {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+}
+
+
+/* Register */
+
+#Form {
+    width: 35%;
+    padding-left: 20px;
+}
+
+#Form label {
+    display: block;
+    margin-top: 10px
+}
+
+#Form input, #Form select {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ed7966;
+}
+
+#Form button {
+    margin-top: 20px;
+    background-color: #ed7966;
+    border-radius: 4px;
+    padding: 5px 5px;
+    border-color: none;
+}
+
+#Form table th, #Form table td {
+    border: 1px solid #000000;
+    padding: 5px;
+}
+
+
+/* Writer */
+
+#boton-perfil-reader, #boton-perfil-gestion {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: #ed7966;
+    color: #141850;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    width: 80px;
+    height: 35px;
+    text-align: center; 
+    line-height: 10px;
+}
+
+#boton-perfil-gestion {
+    top: 50px;
+}
+
+.button3 {
+    background-color: #ed7966;
+    color: #141850;
+    border-radius: 4px;
+    padding: 14px 20px;
+    margin: 10px 25px;
+    margin-left: 140px;
+    margin-right: 140px;
+    border: none;
+    cursor: pointer;
+    width: 10%; 
+}
+
+.button4 {
+    background-color: #ed7966;
+    color: #141850;
+    border-radius: 5px;
+    display: block;
+    height: 40px;
+    margin: 0 auto;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+}
+
+.contenido, .div-botonesCrear, #fotos{
+    display: flex;
+    text-align: center;
+    
+}
+
+.div_izquierda, .div_centro,  .div_derecha{
+    background-color: #2b6dab;
+    width: 33%;
+    margin-right: 30px;
+    margin-left: 30px; 
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    line-height: 2;
+}
+
+.imageProducto, .imagePersona, .imageEntidad{
+    width: 5%;
+    margin-right: 10px;
+}
+
+.div-bottonesCrear {
+    margin-top: 40px;
+}
+
+.producto p, .persona p, .entidad p {
+    color: white;
+    font-size: 17px;
+}
+
+.datos-writer {
+    margin-top: 30px;
+    background-color:#2b6dab;
+    margin: 20px auto;
+    padding: 20px;
+    width: 40%;
+    text-align: center;
+}
+
+.datos-writer h3, .datos-writer h5, .datos-writer p {
+    margin-bottom: 10px;
+    color: white;
+    font-size: 18px;
+}
+
+.datos-writer h3 {
+    font-size: 24px;
+}
+
+.class-button { 
+    border: 2px solid #ed7966;
+    color: #141850;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 12px 15px;
+    font-size: 15px;
+}
+
+#div_formulario_editar {
+    display: inline-block;
+    text-align: left;
+    background-color: #2b6dab;
+    padding: 20px;
+    margin-top: 20px;
+    color: white; 
+    margin-bottom: 10px;
+}
+
+#div_formulario_editar h4 {
+    margin-top: 10px;
+     margin-bottom: 10px;
+}
+
+#div_info_usuario p {
+  margin-top: 10px; 
+  font-weight: bold; 
+}
+
+
+/* Elementos */
+
+.relaciones {
+    display: inline-block;
+    text-align: left;
+    background-color: #2b6dab;
+    padding: 20px;
+    margin-top: 20px;
+    color: white;
+    margin-bottom: 10px;
+}
+ 
+#relaciones_productos,
+#relaciones_entidades, #relaciones_personas, #relaciones_personasAux {
+    display: inline-block;
+    width: calc(50% - 20px);
+    vertical-align: top;
+    margin-right: 20px;
+}
+  
+#relaciones_entidades, #relaciones_personasAux {
+    margin-right: 0;
+}
+
+.contenedor-details {
+  margin-top: 20px;
+}
+
+.div_izquierda_details,
+.div_derecha_details {
+  width: 50%;
+}
+
+.div_izquierda_details, .div_derecha_details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.div_izquierda_details img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.div_izquierda_details h2,
+.div_izquierda_details h4 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.div_derecha_details iframe {
+  width: 500px;
+  height: 500px;
+  border: none;
+}
+
+.detalles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.detalles > div {
+  width: 48%;
+}
+
+.div_entidades,
+.div_productos,
+.div_personas {
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.div_entidades h3,
+.div_productos h3,
+.div_personas h3 {
+  margin-bottom: 10px;
+}
+
+.div_entidades p,
+.div_productos p,
+.div_personas p {
+  display: flex;
+  align-items: center;
+}
+
+.div_entidades img,
+.div_productos img,
+.div_personas img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.div_entidades button,
+.div_productos button,
+.div_personas button {
+  padding: 5px 10px;
+  background-color: #b0c9e0;
+  border: none;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.imageEntidad {
+    margin-top: 10px;
+}
+
+.div_entidades button:hover,
+.div_productos button:hover,
+.div_personas button:hover {
+  background-color: #8cb1d6;
+}
+
+.div_relaciones {
+    width: 80%;
+  margin: 0 auto;
+  background-color: #2b6dab;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.div_informacion {
+    color: black;
+}
+
+.contenido-usuarios {
+    display: inline-block;
+    text-align: left;
+    background-color: #2b6dab;
+    padding: 20px;
+    margin-top: 20px;
+    color: white; 
+    font-size:20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px;
+    grid-auto-rows: max-content;
+    padding-top: 50px;
+}
+  
+.grid-item {
+    background-color: #2b6dab;
+    padding: 20px;
+    border-radius: 5px;
+    width: 70%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.grid-item img {
+    max-width: 100%;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+a {
+    font-size: 17px;
+    color:#deebf7;
+}
+
+ul {
+    list-style: none;
+    text-align: left;
+    padding-left: 0.1px;
+}
+
+.modify {
+    background-color: #deebf7;
+    color: #141850;
+    font-size: 13px;
+    padding: 5px 5px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+  
+.trash {
+    background-color: #deebf7;
+    color: #141850;
+    font-size: 13px;
+    padding: 5px 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+h2 {
+    color: #deebf7;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#Details, #Form {
+    text-align: left;
+    margin: 0 50px;
+    font-size: 18px;
+}
+
+#Details {
+    width: 60%;
+}
+
+#Details table {
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#Details table th, #Details table td {
+    border: 1px solid #141850;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+#Details table td ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+#Details {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin: 0 auto; 
+}
+
+#Details1 {
+    display: flex;
+    padding-top: 20px;
+    color: #141850;
+    max-width: 800px; 
+    padding-bottom: 90px; 
+}
+  
+#Details1Left {
+    text-align: center;
+    padding-right: 200px;
+}
+  
+#Name {
+    font-size: 34px;
+    color: #141850;
+    padding-bottom: 10px;
+}
+  
+#UrlImage {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    height: 200px;
+    width: 200px;
+    padding-bottom: 20px;
+}
+  
+#DateI,
+#DateF {
+    padding-top: 20px;
+}
+
+#DateF {
+    padding-bottom: 40px;
+}
+ 
+#UrlWiki {
+    height: 350px;
+    width: 500px;
+}
+
+#Participantes {
+    border: 2px solid #141850;
+    width: 90%;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #141850;
+    position: absolute; 
+    bottom: 0;
+    padding: 20px; 
+}
+
+.ParticipanPersonas a,
+.ParticipanEntidades a {
+    color: #2b6dab;
+}
+
+
+
+

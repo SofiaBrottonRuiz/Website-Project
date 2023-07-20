@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Entidades</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Sofia Brotton"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <link rel="stylesheet" type="text/css" href="../style.css"/>
+        <link rel="icon" href="../Fotos/icon.png" type="image/icon type">
+        <script src="https://unpkg.com/jquery@1"></script>
+        <script  type="text/javascript" src="entidades.js"></script>
+    </head>
+    <header>
+        <h1><b>Anales de la Ciencia</b></h1>
+    </header>
+    <div class="div-volver">
+        <button id="boton-volver" onclick="Volver()">
+            <img src="../Fotos/arrow.png" alt="Volver" />
+        </button>
+    </div>
+    <body onload="CargaDetails()" style="background-color: #b0c9e0" >
+        <div class="contenedor-details">
+            <div class="cabecera-principal" id="cabecera_details">
+            </div>
+            <div class= "div_info" id="div_info_usuario">
+            </div>
+            <div class="detalles">
+                <div class="div_izquierda_details" id="div_informacion">
+                </div>
+                <div class="div_derecha_details" id="div_wiki">
+                </div>
+            </div>
+            <div class="div_relaciones">
+                <div id="div_personas" class="div_personas">
+                </div>
+                <div id="div_productos" class="div_productos">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
